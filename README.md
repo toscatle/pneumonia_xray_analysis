@@ -6,26 +6,28 @@ Author: Tosca Le
 
 ## Overview
 
-<!-- This project explores the National 2009 H1N1 Flu Survey (NHFS), which was a phone survey that asked respondents if they received the H1N1 and seasonal flu vaccines, as well as additional questions about their socioeconomic, demographic background, and opinions on illness risks and vaccine effectiveness. 
+This project explores a dataset of x-ray images from pediatric patients with/without pneumonia. Pneumonia is a very common inflammatory condition that is found in the lungs, primarily in the air sacs when filled with fluid or pus. Symptoms can include cough, fever, chills, and difficulty breathing. Pneumonia can be life-threatening, but particularly to infants, children and people over the age of 65 (Mayo Clinic).
 
-The Public Health Institute would like to focus their efforts on outreach to communities that would benefit from more seasonal flu vaccine information/resources based on features identified to affect the probability of receiving the flu vaccine the most. -->
+The images in the dataset were selected from cohorts of patients from one to five years old from Guangzhou Women and Children's Medical Center. The data was provided by Kermany et al. on Mendeley through Kaggle datasets. All the chest x-ray images were screened for quality control, and then the diagnoses of the images were graded by two expert physicians before cleared for training.
+
 ***
 
 ## Business Problem
 
-<!-- The goal is to understand what drives the models and which features are important in the prediction of individuals who will get the seasonal flu vaccine or not. The Public Health Institute should be able to use this understanding to minimize missing people that could've benefited from vaccine outreach and see what factors might contribute the most to individuals choosing to receive the vaccine. By knowing this, the Public Health Institute can focus their efforts on specific communities and aid in providing the necessary resources to increase vaccine rates and in return, better understand vaccine effectiveness. -->
+The Children's Medical Center has asked for assistance in partially automating the diagnosis of pneumonia in their pediatric patients. Rather than finding the best possible accuracy on a model, a deep neural network that has been clearly iterated on can help our understanding of how these models and automation work in order to help doctors confidently and efficiently diagnosis pneumonia. Broadly speaking, this can also help our understanding of AI learning and its implementation in other parts of the medical field.
+
 ***
 
 ## Data
 
-<!-- The NHFS data subset includes a features and labels set. The features set contains the different survey questions while the labels set contains the target variables, which are whether the respondents received the vaccines. The dataset contains 26,707 entries including 35 features, ranging from opinion and behavioral questions to socio-economic and demographic questions.For this analysis, only the seasonal flu specific features and label will be used. -->
+The data was organized into three folders: train, test, and val. Each folder contains sub-folders labeled as two categories, normal and pneumonia. Within the train set there are 5216 images between the two classes, 624 in test and only 16 images in val. Since the val set contained very few images, to better balance the validation set, I randomly selected images from the test folder and moved them to the respective class within val.
 
 ***
 
 
 ## Methods
 
-<!-- This project analyzes and compares classification models based on whether or not the respondent received the seasonal flu vaccine. After preparing and preprocessing the data, the dataset is split into train and test subsets for model validation. Precision and ROC-AUC scores were used as evaluation metrics. -->
+This project analyzes and compares neural network models based on whether or not the patient has pneumonia or not. After preparing and preprocessing the data, the dataset is split into train, test, and validataion subsets for model validation. Accuracy was used as the evaluation metric.
 
 ***
 
