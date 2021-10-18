@@ -1,7 +1,7 @@
 # X-Ray Images Analysis for Pneumonia in Pediatric Patients
 Author: Tosca Le
 
-<!-- <img src="images/vaccine stock photo.jpeg"> -->
+<img src="images/title image.jpeg">
 
 
 ## Overview
