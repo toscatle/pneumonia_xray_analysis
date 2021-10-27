@@ -6,76 +6,73 @@ Author: Tosca Le
 
 ## Overview
 
-This project explores a dataset of x-ray images from pediatric patients with/without pneumonia. Pneumonia is a very common inflammatory condition that is found in the lungs, primarily in the air sacs when filled with fluid or pus. Symptoms can include cough, fever, chills, and difficulty breathing. Pneumonia can be life-threatening, but particularly to infants, children and people over the age of 65 (Mayo Clinic).
+This project explores a dataset of x-ray images from pediatric patients with/without pneumonia. Pneumonia is a very common inflammatory condition that is found in the lungs, primarily in the air sacs when filled with fluid or pus. 
 
-The images in the dataset were selected from cohorts of patients from one to five years old from Guangzhou Women and Children's Medical Center. The data was provided by Kermany et al. on Mendeley through Kaggle datasets. All the chest x-ray images were screened for quality control, and then the diagnoses of the images were graded by two expert physicians before cleared for training.
-
+The images in the dataset were selected from cohorts of patients from one to five years old from Guangzhou Women and Children's Medical Center. The data was provided by Kermany et al. on Mendeley through Kaggle datasets. All the chest x-ray images were screened for quality control, and then the diagnoses of the images were graded by two expert physicians before cleared for training. This project outlines the implementation of neural networks and how it can help classify whether or not a given patient has pneumonia, given a chest x-ray image.
 ***
 
 ## Business Problem
 
-The Children's Medical Center has asked for assistance in partially automating the diagnosis of pneumonia in their pediatric patients. Rather than finding the best possible accuracy on a model, a deep neural network that has been clearly iterated on can help our understanding of how these models and automation work in order to help doctors confidently and efficiently diagnosis pneumonia. Broadly speaking, this can also help our understanding of AI learning and its implementation in other parts of the medical field.
+The Children's Medical Center has asked for assistance on exploring whether partially automating the diagnosis of pneumonia in their pediatric patients is possible. Rather than finding the best possible accuracy on a model, a deep neural network that has been clearly iterated on can help our understanding of how these models and automations work and if it can help doctors confidently and efficiently diagnosis pneumonia. Broadly speaking, this can also help our understanding of AI learning and its implementation in the medical field. The Children's Medical Center hopes to gain more understanding of supervised learning and it's potential use case in diagnosis.
 
 ***
 
 ## Data
 
-The data was organized into three folders: train, test, and val. Each folder contains sub-folders labeled as two categories, normal and pneumonia. Within the train set there are 5216 images between the two classes, 624 in test and only 16 images in val. Since the val set contained very few images, to better balance the validation set, I randomly selected images from the test folder and moved them to the respective class within val.
+The data was organized into three folders: train, test, and val. Each folder contains sub-folders labeled as two categories, normal and pneumonia. Within the train set there are 5216 images between the two classes, 624 in test and only 16 images in val. To better balance the validation set, I randomly selected images from the test folder and moved them to the respective class within val. 
 
 ***
 
 
 ## Methods
 
-This project analyzes and compares neural network models based on whether or not the patient has pneumonia or not. After preparing and preprocessing the data, the dataset is split into train, test, and validataion subsets for model validation. Accuracy was used as the evaluation metric.
+This project analyzes and compares neural network models based on whether or not the patient has pneumonia or not. The goal is to demonstrate an understanding of a working model. With the dataset being quite large, only training on a portion of the dataset will allow me to run models in a reasonable time. Accuracy was used as the evaluation metric and in the evaluation, other metrics such as recall are examined.
 
 ***
 
 
 ## Results
 
-<!-- The intial baseline shows the seasonal flu vaccine target having fairly balanced classes, roughly half of respondents received the flu vaccine. 
+The baseline shows that it is likely overfit to the training data. Additionally, the validation scores jump around much more than the training on the learning curves.
 
-![graph1](./images/baseline.png)
+![graph1](./images/baseline_lc.png)
 
-After iterating through logistic regression and decision tree models, the two models had similar ROC-AUC scores and ROC curves. 
+After iterating through a shallow basic CNN model, the two had similar accuracy scores and recall. The shallow CNN had a slightly better recall score and optimized more false positives.
 
-![graph2](./images/rocauc.png)
+![graph2](./images/shallowcnn_lc.png)
 
-However, the tuned decision tree (last iteration) had slightly better precision than the logistic regression and did not have as many false positives.
+The last iteration, a ResNet50 model had worse accuracy scores than the previous iterations. However, it had a greater recall score and more false positives compared to false negatives. 
 
-![graph3](./images/dtmatrix.png) -->
+![graph3](./images/resnet_lc.png)
+![graph4](./images/resnet_cm.png)
+
 
 ***
 
 
 ## Conclusions
+Due to the nature of this business problem, it is fairly safe to assume that it would be better to have more false positives rather than false negatives. In other words, a positive diagnosis of pneumonia when the patients ultimately did not have pneumonia can potentially be worse then a patient who does have pneumonia is diagnosed as negative or "normal".
 
-<!-- The tuned decision tree had minimal false positives (number of observations where the model predicted someone will get the vaccine but they ultimately didn't) and optimize on precision, which measures the proportion of positive identifications that were actually correct.
+Even though the ResNet50 model had a similar accuracy to the baseline at 0.73, it had the highest recall score and false positives. Overall, as seen through each iteration, by adding more layers and in return, adding more complexity, the weights in the network increase and are able to extract more features. However, adding more layers isn't always the answer. It is heavily dependent on the data. With more tuning, there would probably be a better performing model.
 
-With this model, the top three weighed feature importance were: opinion_seas_vacc_effective, doctor_recc_seasonal, and opinion_seas_risk. The first feature refers to the respondent's opinion about seasonal flu vaccine effectiveness and was categorized between 1 (very low) to 5 (very high). The last feature, opinion about risk of getting sick with seasonal flu without the vaccine also had the same value range. For seasonal flu vaccine recommendation by doctor, it was a binary yes or no question. 
+Overall, it is possible to utilize AI in helping our understanding of classification, and I know it will continue to grow in the health and medical space. As more and more data is available, and deeper models such as ResNet can be tuned to learn more efficiently, it will only increase performance and proper diagnosis. This increased understanding can help medical personnel in not only efficiency but parameters of diagnosis such as patterns we may not be able to notice. This can also help broaden our scope to other sectors of help.
 
-Explaining the effectiveness of receiving the flu vaccine and risks of not receiving it may increase the likelihood of someone who might have doubts and could benefit from a better understanding. The Public Health Institute could provide informational materials to place in medical buildings or give to medical staff to give patients. Even if they were already planning on getting the flu vaccine, having information readily available could minimize missing people who might not be deemed at risk or assumed to have received the flu vaccine. -->
 
 ***
 
 ### Next Steps
 
-<!-- * The survey data included H1N1-specific questions. These are likely to be highly correlated with seasonal flu attitudes and outcomes, which can affect the interpretation of the models. It would be interesting to examine these relationships or data specifically collected on seasonal flu vaccine independently in more recent years.
+* There are many parameters that could've been tuned or incorporated in the preprocessing steps and models. Our understanding of these additional iterations can continue to inform the use case and business problem.
+* The x-rays in this dataset were of pediatric patients. It would be interesting to see how this process and these models would perform with a different dataset or a more diverse dataset such as including adults.
 
-* Since there was such a wide range of features, including the categorical features that were omitted, it might be beneficial to simplify the analysis by examining specific subsets of features.
-
-* This data was collected through a phone survey, which probably has barriers in itself in terms of data collection and thoroughness. Finding different ways to collect this type of data could help our analysis or present different ways for this problem to be examined.
-
-* There are many parameters that could've been tuned or other models to explore. Our understanding of these additional iterations can help the business problem as well. -->
 
 ***
 
 ## For More Information
 
-<!-- Please review my full analysis in my [Jupyter Notebook](./flu_vaccine_analysis.ipynb) or [presentation](./flu_vaccine_analysis_presentation.pdf).
+Please review my full analysis in my [Jupyter Notebook](./pneumonia_xray_analysis.ipynb) or [presentation](./pneumonia_xray_analysis_presentation.pdf).
 
-The data for this analysis was provided by [DrivenData](https://www.drivendata.org/competitions/66/flu-shot-learning/page/210/) through the courtesy of the [United States National Center for Health Statistics](https://www.cdc.gov/nchs/index.htm).  -->
+The data for this analysis was provided by [Kermany et al.](https://data.mendeley.com/datasets/rscbjbr9sj/2) through the courtesy of [Kaggle](https://www.kaggle.com/paultimothymooney/chest-xray-pneumonia). 
 
 For any additional questions, please contact me at **toscatle@gmail.com**.
 
@@ -83,11 +80,12 @@ For any additional questions, please contact me at **toscatle@gmail.com**.
 
 ## Repository Structure
 
-<!-- ```
+```
 ├── images
 ├── .gitignore
 ├── LICENSE                          
 ├── README.md 
-├── flu_vaccine_analysis.ipynb                                  
-└── flu_vaccine_analysis_presentation.pdf                               
-``` -->
+├── data_split.ipynb  
+├── pneumonia_xray_analysis.ipynb                                  
+└── pneumonia_xray_analysis_presentation.pdf                               
+```
